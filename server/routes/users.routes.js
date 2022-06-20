@@ -6,7 +6,7 @@ import {
   getUser,
   getAllUsers,
 } from '../controllers/user.controller.js';
-import { verifyAdmin, verifyToken, verifyUser } from '../ultils/verifyToken.js';
+import { verifyAdmin, verifyUser } from '../ultils/verifyToken.js';
 
 const router = express.Router();
 
@@ -22,12 +22,12 @@ const router = express.Router();
 //   res.send('Hello Admin, You are logged in');
 // });
 
-router.put('/:id', updateUser);
+router.put('/:id', verifyUser, updateUser);
 
-router.delete('/:id', deleteUser);
+router.delete('/:id', verifyUser, deleteUser);
 
-router.get('/:id', getUser);
+router.get('/:id', verifyUser, getUser);
 
-router.get('/', getAllUsers);
+router.get('/', verifyAdmin, getAllUsers);
 
 export default router
